@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Регистрация</title>
+</head>
+<head th:insert="blocks/head :: head"></head>
+<body style="background: #ffcb5b">
+<div th:insert="blocks/nav :: nav"></div>
+<section class="text-center  testimonials">
+    <div class="container">
+        <div th:if="${message}" class="alert alert-warning" role="alert">
+            <strong th:text="${message}"></strong>
+        </div>
+        <h2 class="mb-5">Регистрация</h2>
+        <form action="/reg" method="post">
+            <div class="d-xl-flex justify-content-xl-center" style="margin-bottom: 10px;">
+                <div class="row d-xl-flex" style="max-width: 500px;">
+                    <div class="col"><input class="form-control" type="text" name="username" required placeholder="Логин">
+                    </div>
+                </div>
+            </div>
+            <div class="d-xl-flex justify-content-xl-center" style="margin-bottom: 10px;">
+                <div class="row d-xl-flex" style="max-width: 500px;">
+                    <div class="col"><input class="form-control" type="password" name="password" required placeholder="Пароль">
+                    </div>
+                </div>
+            </div>
+            <div class="d-xl-flex justify-content-xl-center" style="margin-bottom: 10px;">
+                <div class="row d-xl-flex" style="max-width: 500px;">
+                    <div class="col">
+                        <button class="btn btn-primary" type="submit">Зарегистрироваться</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/bs-init.js"></script>
+</body>
+
+</html>

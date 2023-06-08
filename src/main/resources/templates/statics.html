@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Статистика</title>
+</head>
+<head th:insert="blocks/head :: head"></head>
+<body style="background: #ffcb5b">
+<div th:insert="blocks/nav :: nav"></div>
+<section class="text-center testimonials">
+    <div class="container">
+        <h2 class="mb-5">Статистика</h2>
+        <div class="row">
+            <div class="col">
+                <h3>Название курса</h3>
+            </div>
+            <div class="col">
+                <h3>Проходят в данный момент</h3>
+            </div>
+            <div class="col">
+                <h3>Прошли</h3>
+            </div>
+        </div>
+        <div th:each="stat : ${statics}" class="row">
+            <div class="col">
+                <p class="text-start" style="font-size: 20px;" th:text="${stat.sub.name}"></p>
+            </div>
+            <div class="col">
+                <p class="text-end" style="font-size: 20px;" th:text="${stat.countNow}"></p>
+            </div>
+            <div class="col">
+                <p class="text-end" style="font-size: 20px;"  th:text="${stat.countComplete}"></p>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/bs-init.js"></script>
+</body>
+
+</html>

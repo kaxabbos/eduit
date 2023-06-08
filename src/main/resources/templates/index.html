@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Главная</title>
+</head>
+<head th:insert="blocks/head :: head"></head>
+<body style="background: #ffcb5b">
+<div th:insert="blocks/nav :: nav"></div>
+<header class="text-center text-white masthead"
+        style="background: url(&quot;/img/bg.jpg&quot;) center / cover;">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-9 mx-auto position-relative">
+                <h1 class="mb-5" style="background: rgba(0,0,0,0.7);">EduIT</h1>
+            </div>
+            <div class="col-md-10 col-lg-8 col-xl-7 mx-auto position-relative">
+                <p style="background: rgba(0,0,0,0.7);">IT-курсы - это возможность получить новые знания и навыки в
+                    сфере информационных технологий и стать более востребованным специалистом.</p>
+            </div>
+        </div>
+    </div>
+</header>
+<section class="text-center testimonials">
+    <div class="container">
+        <h2 class="mb-5">Преподаватели</h2>
+        <div th:if="${role == 'MANAGER'}" class="row" style="margin: 10px -12px;">
+            <div class="col-lg-4 col-xl-12"><a class="btn btn-primary" role="button" href="/teachers/add">Добавить
+                преподавателя</a>
+                <div class="mx-auto testimonial-item mb-5 mb-lg-0"></div>
+            </div>
+        </div>
+        <div th:each="t : ${teachers}" class="row" style="margin-bottom: 10px;">
+            <div class="col">
+                <div class="mx-auto testimonial-item mb-5 mb-lg-0">
+                    <img class="rounded-circle img-fluid mb-3" th:src="'/img/' + ${t.file}">
+                    <h5 th:text="${t.name}"></h5>
+                </div>
+            </div>
+            <div class="col">
+                <p class="font-weight-light mb-0" style="text-align: left;font-size: 20px;">Тел: +<span
+                        th:text="${t.tel}"></span></p>
+                <p class="font-weight-light mb-0" style="text-align: left;font-size: 20px;">Опыт работы: <span
+                        th:text="${t.exp}"></span> лет</p>
+                <p class="font-weight-light mb-0" style="text-align: left;font-size: 20px;">Специализация: <span
+                        th:text="${t.spec}"></span></p>
+                <p class="font-weight-light mb-0" style="text-align: left;font-size: 20px;">Достижения: <span
+                        th:text="${t.ach}"></span></p>
+                <p class="font-weight-light mb-0" style="text-align: left;font-size: 20px;">Почта: <span
+                        th:text="${t.email}"></span></p>
+            </div>
+            <div th:if="${role == 'MANAGER'}" class="col" style="max-width: 270px;">
+                <a class="btn btn-primary" role="button" style="margin-right: 15px;"
+                   th:href="'/teachers/edit/' + ${t.id}">Редактировать</a>
+                <a class="btn btn-danger" role="button" th:href="'/teachers/delete/' + ${t.id}">Удалить</a></div>
+        </div>
+    </div>
+</section>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/bs-init.js"></script>
+</body>
+
+</html>

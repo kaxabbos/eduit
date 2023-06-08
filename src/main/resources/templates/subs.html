@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Учебные программы</title>
+</head>
+<head th:insert="blocks/head :: head"></head>
+<body style="background: #ffcb5b">
+<div th:insert="blocks/nav :: nav"></div>
+<section class="text-center testimonials">
+    <div class="container">
+        <h2 class="mb-5">Учебные программы</h2>
+        <div th:if="${role == 'MANAGER'}" class="row" style="margin: 10px -12px;">
+            <div class="col-lg-4 col-xl-12"><a class="btn btn-primary" role="button" href="/subs/add">Добавить учебную
+                программу</a>
+                <div class="mx-auto testimonial-item mb-5 mb-lg-0"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div th:each="sub : ${subs}" class="col-xl-4" style="margin-bottom: 10px;">
+                <img th:src="'/img/' + ${sub.file}" style="border-radius: 30px;padding: 5px;" width="100%">
+                <h3 th:text="${sub.name}"></h3>
+                <p class="text-start" style="font-size: 20px;margin-bottom: 0;">Специализация: <span
+                        th:text="${sub.spec}"></span></p>
+                <p class="text-start" style="font-size: 20px;margin-bottom: 0;">Количество модулей: <span
+                        th:text="${sub.modules}"></span></p>
+                <p class="text-start" style="font-size: 20px;margin-bottom: 0;">Время прохождения <span
+                        th:text="${sub.time}"></span></p>
+                <p class="text-start" style="font-size: 20px;margin-bottom: 0;">Сложность: <span
+                        th:text="${sub.complexity}"></span>></p>
+                <p th:if="${sub.description.length() > 0}" class="text-start" style="font-size: 20px;margin-bottom: 0;">
+                    Описание: <span th:text="${sub.description}"></span></p>
+                <form th:if="${role == 'CLIENT' and !user.inMySubs(sub.id)}" th:action="'/subs/buy/' + ${sub.id}"
+                      method="post" class="mt-1">
+                    <div class="row">
+                        <div class="col">
+                            <select name="teacherId" class="form-select" style="width: 100%">
+                                <option th:each="t : ${teachers}" th:value="${t.id}" th:label="${t.name}"></option>
+                            </select>
+                        </div>
+                        <div class="col-auto">
+                            <button class="btn btn-primary" type="submit">Изучить</button>
+                        </div>
+                    </div>
+                </form>
+                <a th:if="${role == 'MANAGER'}" class="btn btn-primary" role="button"
+                   th:href="'/subs/edit/' + ${sub.id}" style="margin-right: 10px;margin-top: 5px;">Редактировать</a>
+                <a th:if="${role == 'MANAGER'}" class="btn btn-danger" role="button"
+                   th:href="'/subs/delete/' + ${sub.id}" style="margin-top: 5px;">Удалить</a>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/bs-init.js"></script>
+</body>
+
+</html>
